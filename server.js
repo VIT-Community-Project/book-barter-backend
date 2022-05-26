@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const mongoose =  require('mongoose');
+mongoose.connect("mongodb://localhost/Community-Project");
+const User = require('./db')
 
 app.get('/',(req,res)=>{
     res.send('Hi');
