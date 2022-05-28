@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
             type : String,
             // required : true
         },
-        PIN : {
+        pin : {
             type : String,
             // required : true
         },
@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    pending_Offers : {
+    pendingOffers : {
         type : String,
         required : true
     }
