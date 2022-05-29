@@ -5,10 +5,6 @@ const routes = require('./routes');
 const app = express();
 require('./db');
 
-app.get('/',(req,res)=>{
-    res.send('Hi');
-})
-
 app.use("/", routes);
 
 const PORT = process.env.PORT || 3000;      //if not specified port is 3000
