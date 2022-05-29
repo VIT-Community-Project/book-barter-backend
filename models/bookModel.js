@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const BookSchema = new mongoose.Schema({
+const bookSchema = new Schema({
     isbn :{
         type : String,
         required : true
@@ -31,4 +32,4 @@ const BookSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model("Book",BookSchema);
+module.exports = mongoose.model("Book",bookSchema);
