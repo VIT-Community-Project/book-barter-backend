@@ -3,6 +3,7 @@ const express = require('express');
 const routes = require('./routes');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors')
 const { I18n } = require('i18n');
 
 const app = express();
@@ -24,6 +25,8 @@ app.use(bodyParser.urlencoded({
     extended: true,
     parameterLimit: 1000000
 })); 
+
+app.use(cors());
 
 app.use("/", routes);
 
