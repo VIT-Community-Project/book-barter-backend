@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
-    street: {
+      street: {
         type: String,
         required: true,
       },
@@ -35,7 +35,7 @@ const UserSchema = new Schema({
         type : String,
         required : true
     },
-    phone_Number :{
+    phoneNumber :{
         type : Number,
         required : true
     },
@@ -52,13 +52,13 @@ const UserSchema = new Schema({
     },
     pendingOffers : {
         type : String,
-        required : true
+        // required : true
     },
     address: addressSchema
 }, { timestamps: true });
 
 UserSchema.pre('save', async function(next) {
-    const salt = bcrypt.genSalt();
+    const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
 
     next();
