@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const Email = require("../util/email");
 
 module.exports.signup = async function (userData) {
     console.log(userData);
@@ -21,4 +22,10 @@ module.exports.signup = async function (userData) {
 
         return { isRegistered, isAccountActive, userRecord };
     }
+}
+
+module.exports.sendVerificationMail = async function (userData) {
+    const reciepientEmail = userData.userRecord.email;
+    Email.sendEmail(reciepientEmail);
+
 }

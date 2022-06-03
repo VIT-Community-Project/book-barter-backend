@@ -26,8 +26,9 @@ module.exports.signup = async function (req, res) {
             address: { street, city, country, state, pincode }};
 
         let userStatus = await userService.signup(userData);
-
+        console.log(userStatus);
         if(!userStatus.isRegistered || (userStatus.isRegistered && !userStatus.isAccountActive)) {
+            userService.sendVerificationMail(userStatus);
             return res.status(http.created).send({
                 message: res.__("api-200"),
                 data: userStatus.userRecord,

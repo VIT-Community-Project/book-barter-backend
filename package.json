@@ -26,7 +26,9 @@
     "http": "^0.0.1-security",
     "i18n": "^0.15.0",
     "i18n-js": "^3.9.2",
-    "mongoose": "^6.3.4"
+    "mongoose": "^6.3.4",
+    "nodemailer": "^6.7.5",
+    "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
