@@ -4,7 +4,7 @@ const { http } = require("../config");
 module.exports.signup = async function (req, res) {
     try {
         let { street, city, country, state, pincode, name, email, phoneNumber, password } = req.body;
-        
+
         if(
             !street ||
             !city ||
@@ -30,7 +30,7 @@ module.exports.signup = async function (req, res) {
         if(!userStatus.isRegistered || (userStatus.isRegistered && !userStatus.isAccountActive)) {
             return res.status(http.created).send({
                 message: res.__("api-200"),
-                data: userStatus.userRecord,
+                data: { user: userStatus.userRecord, token: userStatus.token },
                 status: { status: true, count: 0 },
             });
         }

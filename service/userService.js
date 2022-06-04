@@ -20,7 +20,8 @@ module.exports.signup = async function (userData) {
         let newUser = new userModel(userData);
         userRecord = await newUser.save();
 
-        return { isRegistered, isAccountActive, userRecord };
+        const token = await tokenService.generateToken(userRecord.id);
+        return { isRegistered, isAccountActive, userRecord, token };
     }
 }
 
