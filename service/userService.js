@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const tokenService = require('../service/tokenService');
 
 module.exports.signup = async function (userData) {
     console.log(userData);
@@ -21,4 +22,11 @@ module.exports.signup = async function (userData) {
 
         return { isRegistered, isAccountActive, userRecord };
     }
+}
+
+module.exports.login = async function (email, password) {
+    const user = await userModel.findUser(email, password);
+    const token = await tokenService.generateToken(user.id);
+    
+    return { userId: user.id, token };
 }
