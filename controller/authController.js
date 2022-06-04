@@ -1,11 +1,10 @@
 const userService = require("../service/userService");
 const { http } = require("../config");
-const jwt = require('jsonwebtoken');
 
 module.exports.signup = async function (req, res) {
     try {
         let { street, city, country, state, pincode, name, email, phoneNumber, password } = req.body;
-        console.log(typeof(password));
+        
         if(
             !street ||
             !city ||
