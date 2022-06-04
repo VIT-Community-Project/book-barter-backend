@@ -5,13 +5,13 @@ function sendEmail(email){
     var transporter = nodemailer.createTransport(smtpTransport({
         service: 'gmail',
         auth: {
-          user: 'kartik.jain2021@vitbhopal.ac.in',
-          pass: 'Kartik@11'
+          user:  process.env.USER_EMAIL,
+          pass: process.env.USER_PASSWORD
         }
       }));
       
       var mailOptions = {
-        from: 'kartik.jain2021@vitbhopal.ac.in',
+        from: process.env.USER_EMAIL,
         to: email,
         subject: 'Trt to learn how to send mail',
         text: 'That was easy!'
