@@ -73,3 +73,64 @@ module.exports.login = async function (req, res) {
         });
     }
 }
+
+
+// module.exports.activateUser = async function(req,res){
+//     try{
+//         userData.findOne({
+//             id: req.params.id,
+//           })
+//             .then((userData) => {
+//               if (!userData) {
+//                 return res.status(http.badRequest).send({ 
+//                     message: req.__("api-400"),
+//                 });
+//               }
+//               userData.userStatus = "Active";
+//               userData.save((error) => {
+//                 if (error) {
+//                   res.status(http.internalServerError).send({ 
+//                       message: req.__("api-500") });
+//                   return;
+//                 }
+//                 return userData;
+//               });
+//             })
+//     }
+//     catch (error) {
+//         console.log(error);
+//         return res.status(http.internalServerError).send({
+//             message: req.__("api-500"),
+//             error,
+//             status: { status: false, count: 0 },
+//         });
+//     }
+// }
+
+module.exports.activate = async function(req,res){
+    try{
+        let { street, city, country, state, pincode, name, email, phoneNumber, password } = req.body;
+        let userData = userData = {name, email, phoneNumber, password, 
+            address: { street, city, country, state, pincode }};
+
+        let userStatus = await userService.activate(userData);
+
+        if(!userStatus.AccountActive){
+            return res.status(http.badRequest).send({ 
+                message: req.__("api-400"),
+            })
+        }
+        else{
+            res.send(userData);
+        }
+    }catch (error) {
+        console.log(error);
+        return res.status(http.internalServerError).send({
+            message: req.__("api-500"),
+            error,
+        });
+    }
+    }
+
+
+

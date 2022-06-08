@@ -31,3 +31,13 @@ module.exports.login = async function (email, password) {
     
     return { userId: user.id, token };
 }
+
+module.exports.activate = async function(userData) {
+    let AccountActive = false;
+    let userRecord = await userModel.findByIdAndUpdate({
+        id : userData.id,
+        if(userRecord){
+            AccountActive = userRecord.status == 'Active'
+        }
+    });
+}
