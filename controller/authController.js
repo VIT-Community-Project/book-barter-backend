@@ -74,54 +74,20 @@ module.exports.login = async function (req, res) {
     }
 }
 
-
-// module.exports.activateUser = async function(req,res){
-//     try{
-//         userData.findOne({
-//             id: req.params.id,
-//           })
-//             .then((userData) => {
-//               if (!userData) {
-//                 return res.status(http.badRequest).send({ 
-//                     message: req.__("api-400"),
-//                 });
-//               }
-//               userData.userStatus = "Active";
-//               userData.save((error) => {
-//                 if (error) {
-//                   res.status(http.internalServerError).send({ 
-//                       message: req.__("api-500") });
-//                   return;
-//                 }
-//                 return userData;
-//               });
-//             })
-//     }
-//     catch (error) {
-//         console.log(error);
-//         return res.status(http.internalServerError).send({
-//             message: req.__("api-500"),
-//             error,
-//             status: { status: false, count: 0 },
-//         });
-//     }
-// }
-
 module.exports.activate = async function(req,res){
     try{
-        let { street, city, country, state, pincode, name, email, phoneNumber, password } = req.body;
-        let userData = userData = {name, email, phoneNumber, password, 
-            address: { street, city, country, state, pincode }};
+        const userId = req.userData.id
 
-        let userStatus = await userService.activate(userData);
+        const activated = await userService.activate(userId);
 
-        if(!userStatus.AccountActive){
-            return res.status(http.badRequest).send({ 
-                message: req.__("api-400"),
-            })
-        }
-        else{
-            res.send(userData);
+        if(activated) {
+            return res.status(http.created).send({
+                message: res.__("api-200"),
+                data: "Your account has been activated",
+                status: { status: true, count: 0 },
+            });
+        }else {
+            throw new Error("Account not found")
         }
     }catch (error) {
         console.log(error);
