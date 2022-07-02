@@ -1,0 +1,175 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Hawai Api Docs",
+        "description": "Api's docs for all developer of this project",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "basePath": "/",
+    "paths": {
+        "api/v1/user/login": {
+            "post": {
+                "summary": "User Login",
+                "description": "User Login using token",
+                "tags": [
+                    "Users"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "user login",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "required": "true"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "required": "true"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "status": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definations": {
+        "todosResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "task": {
+                    "type": "string"
+                },
+                "assignee": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "Task": {
+            "type": "object",
+            "properties": {
+                "task": {
+                    "type": "string"
+                },
+                "assignee": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "successStatus": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "boolean",
+                    "default": "true"
+                },
+                "count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "badStatus": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "boolean",
+                    "default": "false"
+                },
+                "count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Data": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "IncorrectCredentials": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "boolean",
+                    "default": "false"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
