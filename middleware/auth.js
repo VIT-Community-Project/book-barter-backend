@@ -6,7 +6,11 @@ async function auth (req, res, next) {
     try {
         const token = req.header('Authorization').replace("Bearer ", "");
         const decoded = jwt.verify(token, process.env.SECRET_JWT);
-        await authService.findUser(decoded);
+        const user = await authService.findUser(decoded);
+        
+        req.userData = {
+            id: user.id
+        }
         next();
     } catch (error) {
         return res.status(http.unauthorized).send({

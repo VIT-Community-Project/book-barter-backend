@@ -73,3 +73,30 @@ module.exports.login = async function (req, res) {
         });
     }
 }
+
+module.exports.activate = async function(req,res){
+    try{
+        const userId = req.userData.id
+
+        const activated = await userService.activate(userId);
+
+        if(activated) {
+            return res.status(http.created).send({
+                message: res.__("api-200"),
+                data: "Your account has been activated",
+                status: { status: true, count: 0 },
+            });
+        }else {
+            throw new Error("Account not found")
+        }
+    }catch (error) {
+        console.log(error);
+        return res.status(http.internalServerError).send({
+            message: req.__("api-500"),
+            error,
+        });
+    }
+    }
+
+
+

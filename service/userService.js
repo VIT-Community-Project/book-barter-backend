@@ -11,7 +11,7 @@ module.exports.signup = async function (userData) {
         phoneNumber: userData.phoneNumber
     });
 
-    if(userRecord) {
+    if (userRecord) {
         isRegistered = true;
         isAccountActive = userRecord.status == "active" ? true : false;
 
@@ -28,6 +28,17 @@ module.exports.signup = async function (userData) {
 module.exports.login = async function (email, password) {
     const user = await userModel.findUser(email, password);
     const token = await tokenService.generateToken(user.id);
-    
+
     return { userId: user.id, token };
+}
+
+module.exports.activate = async function (userId) {
+    let accountActive = false;
+    let userRecord = await userModel.findByIdAndUpdate({ _id: userId }, { status: "activate" });
+
+    if(userRecord) {
+        accountActive = true;
+    }
+
+    return accountActive;
 }
