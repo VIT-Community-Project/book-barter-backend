@@ -26,5 +26,6 @@
 	"api-40": "api-40",
 	"api-404": "api-404",
 	"Segment Key Invalid": "Segment Key Invalid",
-	"api-422": "api-422"
+	"api-422": "api-422",
+	"api-400-author-title-mandatory": "api-400-author-title-mandatory"
 }

@@ -4,7 +4,7 @@ const bookController = require("../../controller/bookController");
 const { auth } = require('../../middleware');
 
 
-router.post('/save', bookController.bookRecord);
-router.get('/search', bookController.search);
+router.post('/save', auth,bookController.bookRecord);
+router.get('/search', auth, bookController.search);
 
 module.exports = router;
